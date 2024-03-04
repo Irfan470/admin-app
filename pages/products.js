@@ -44,10 +44,23 @@ const StyledLink2 = styled(Link)`
     color: red;
     font-size: 16px;
     text-decoration: none;
-    margin : 10px 10px 10px 700px;
+    margin : 10px 10px 10px 400px;
     background-color: #17a2b8;
     border-radius: 4px;
  
+    padding: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+`;
+const StyledLink3 = styled(Link)`
+    color: red;
+    font-size: 16px;
+    text-decoration: none;
+    margin : 10px 10px 10px 250px;
+    background-color: red;
+    border-radius: 4px;
     padding: 4px;
     color: white;
     border: none;
@@ -93,17 +106,25 @@ export default function products() {
   return (
     <>
       <Layout>
-        <StyledLinkResponsive href={"/products/new"}>Add new products</StyledLinkResponsive>
+        <StyledLinkResponsive href={"/products/new"}>
+          Add new products
+        </StyledLinkResponsive>
       </Layout>
       <StyledHeading>Products</StyledHeading>
       <StyledList>
         {products.map((product) => (
           <li key={product.id}>
+            
             <StyledP>{product.name}</StyledP>
             <StyledLink2Responsive href={`/products/edit/${product._id}`}>
               Edit
             </StyledLink2Responsive>
+            <StyledLink3 href={`/products/delete/${product._id}`}>
+              Delete
+            </StyledLink3>
+            
           </li>
+          
         ))}
       </StyledList>
     </>

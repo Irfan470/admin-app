@@ -24,4 +24,19 @@ export default async function handler(req, res) {
   })
     res.json(productDoc);
   }
+  if(method === "PUT"){
+    const { _id, name, price, description} = req.body;
+    const productDoc = await Product.findByIdAndUpdate(_id, {
+      name,
+      price,
+      description,
+      // images: [image]
+    });
+    res.json(productDoc);
+  }
+  if(method === "DELETE"){
+    const { id } = req.query;
+    const productDoc = await Product.findByIdAndDelete(id);
+    res.json(productDoc);
+  }
 }

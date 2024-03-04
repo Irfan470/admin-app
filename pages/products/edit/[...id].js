@@ -30,6 +30,7 @@ export default function EditProduct() {
     <StyledHeading>Edit Product</StyledHeading>
     {product === null ? <p>Loading...</p> : null}
     {product &&( <ProductForm {...product} />)}
+    
   </Layout>;
 
 

@@ -42,22 +42,35 @@ export default function ProductForm({_id, name:existingName, price:existingPrice
   
  console.log({_id})
   async function saveProduct(e) {
-    e.preventDefault();
-    const product = {
-      name,
-      price,
-      description,
-    };
-    try {
-      const response = await axios.post("/api/products", product);
-      setRedirect(true);
-      console.log("Response:", response);
-    } catch (error) {
-      console.error("AxiosError:", error);
-      console.log("Response Data:", error.response.data);
-      console.log("Response Status:", error.response.status);
+     e.preventDefault();
+        const product = {
+          name,
+          price,
+          description,
+        };
+   
+    if (_id) {
+      try {
+        const response = await axios.put("/api/products",{ ...product, _id});
+        console.log("Response:", response);
+      } catch (error) {
+        console.error("AxiosError:", error);
+      
+      }
+    }else{
+  
+      try {
+        const response = await axios.post("/api/products", product);
+       
+        console.log("Response:", response);
+      } catch (error) {
+        console.error("AxiosError:", error);
+      
+      }
     }
-  }
+     setRedirect(true);
+    }
+    
   if (redirect) {
     return (window.location = "/products");
   }
