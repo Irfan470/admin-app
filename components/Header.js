@@ -1,3 +1,4 @@
+import { signOut } from 'next-auth/react';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -48,9 +49,9 @@ const Header = () => {
           <NavItem>
             <NavLink href="/categories">Categories</NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink href="#">Login</NavLink>
-          </NavItem>
+          <button onClick={()=>signOut()} >
+           Logout
+          </button>
         </NavList>
       </NavContainer>
     );

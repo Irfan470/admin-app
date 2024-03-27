@@ -29,17 +29,20 @@ const StyledButton = styled.button`
   background-color: #17a2b8;
   color: white;
   cursor: pointer;
+  ${(props) =>
+    props.delete &&
+    `
+    background-color: red;
+  `}
 `;
 const StyledTable = styled.table`
-align-items: center;
+  align-items: center;
   width: 100%;
   border-collapse: collapse;
   margin: 20px;
- 
-  
+
   tr {
     border-bottom: 1px solid #ddd;
-    
   }
   th {
     text-align: left;
@@ -49,45 +52,66 @@ align-items: center;
   td {
     padding: 10px;
   }
-
-  
-  ;`
+`;
 export default function categories() {
   const [categories, setCategories] = useState([]);
+  const [input, setInput] = useState("");
+  const [editCat, setEditCat] = useState(null);
   useEffect(() => {
-   getCategories();
-    },
-      []);
-    function getCategories() {
-      axios.get("/api/categories").then((res) => {
-        setCategories(res.data);
-      });
-    } 
- 
+    getCategories();
+  }, []);
+  function getCategories() {
+    axios.get("/api/categories").then((res) => {
+      setCategories(res.data);
+    });
+  }
+
   async function addCategory(e) {
     e.preventDefault();
-    await axios.post("/api/categories", {
-      name: input,
-    });
+    const data = { name: input };
+    if(editCat){
+      await axios.put("/api/categories", {
+        ...data,
+        _id:editCat._id,
+        
+      });
+      setEditCat(false)
+    }else{ await axios.post("/api/categories", 
+     data   
+    );}
+   
     setInput("");
     getCategories();
-  
   }
-  const [input, setInput] = useState("");
+  
+  async function editCategory(category) {
+    setInput(category.name);
+    setEditCat(category)
+  }
+  async function deleteCategory(category){
+    alert("Are you sure you want to delete this category?")
+    await axios.delete("/api/categories",{
+      data:{_id:category._id}
+    })
+    getCategories()
+  }
   return (
     <Layout>
       <StyledH1>Categories</StyledH1>
+      
       <form onSubmit={addCategory}>
+      
         <StyledInput
           type="text"
           placeholder="Category Name"
           onChange={(e) => setInput(e.target.value)}
           value={input}
         />
-        <StyledButton type="submit">Add Category</StyledButton>
+        <StyledButton type="submit" >{ editCat? "Save" : "Add Category"}</StyledButton>
       </form>
       <StyledTable>
         <thead>
+        
           <tr>
             <th>Category Name</th>
             <th>Actions</th>
@@ -98,8 +122,8 @@ export default function categories() {
             <tr key={category._id}>
               <td>{category.name}</td>
               <td>
-                <button>Edit</button>
-                <button>Delete</button>
+                <StyledButton onClick={() => editCategory(category)}>Edit</StyledButton>
+                <StyledButton delete onClick={()=> deleteCategory(category)} >Delete</StyledButton>
               </td>
             </tr>
           );

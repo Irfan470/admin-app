@@ -69,7 +69,6 @@ export default function DeleteProduct() {
   
     });
       
-    alert("Product deleted");
     goBack();
   }
 

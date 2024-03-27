@@ -114,6 +114,7 @@ export default function products() {
         {products.map((product) => (
           <li key={product._id}>
             <StyledP>{product.name}</StyledP>
+            
             <StyledLink2Responsive href={`/products/edit/${product._id}`}>
               Edit
             </StyledLink2Responsive>
