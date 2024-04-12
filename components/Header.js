@@ -30,8 +30,24 @@ const NavLink = styled.a`
     &:hover {
         color: #000;
         font-weight: bold;
+
     }
 `;
+const StyledLogoutButton = styled.button`
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    position: relative;
+    align-items: right
+   
+    &:hover {
+        background-color: #000;
+    }
+
+    `
+
 
 const Header = () => {
     return (
@@ -49,12 +65,12 @@ const Header = () => {
           <NavItem>
             <NavLink href="/categories">Categories</NavLink>
           </NavItem>
-          <button onClick={()=>signOut()} >
+          <StyledLogoutButton onClick={()=>signOut()} >
            Logout
-          </button>
+          </StyledLogoutButton>
         </NavList>
       </NavContainer>
     );
 };
 
-export default Header   ;
+export default Header;

@@ -25,7 +25,7 @@ export default function Layout({children}) {
   if (!session) {
     return (
       <>
-        <Header />
+    
         <StyledButton onClick={() => signIn("google")}>
           Login with Google
         </StyledButton>

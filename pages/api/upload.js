@@ -5,8 +5,13 @@ const bucket = "freshfare";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import mime from "mime-types";
+import { mongo } from "mongoose";
+import { isAdmin } from "./auth/[...nextauth]";
+import { mongooseConnect } from "@/lib/mongoose";
 
 export default async function handler(req, res) {
+  await mongooseConnect();
+      await isAdmin(req, res);
   const form = new multiparty.Form();
   const { fields, files } = await new Promise((resolve, reject) => {
     form.parse(req, (err, fields, files) => {

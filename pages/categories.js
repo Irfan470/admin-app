@@ -96,6 +96,7 @@ export default function categories() {
     getCategories()
   }
   return (
+    
     <Layout>
       <StyledH1>Categories</StyledH1>
       

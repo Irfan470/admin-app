@@ -1,8 +1,11 @@
 import { mongooseConnect } from '@/lib/mongoose'
 import { Category } from '@/models/Category'
-import React from 'react'
+import { getServerSession } from 'next-auth'
+import { configAd, isAdmin } from './auth/[...nextauth]'
+
 
 export default async function handler(req, res) {
+   await isAdmin(req, res)
   const { method } = req
   await mongooseConnect()
     if (method === 'POST') {
