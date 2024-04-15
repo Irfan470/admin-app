@@ -74,7 +74,7 @@ export default function DeleteProduct() {
 
   return (
     <Layout>
-      <StyledP>delete {product?.name}?</StyledP>
+      <StyledP>delete {product?.title}?</StyledP>
       <ButtonWrapper>
         <StyledButton
           primary

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 //   delete mongoose.models["Product"];
 // }
 const ProductSchema = new Schema({
-  name: {
+  title: {
     type: String,
     required: true,
   },

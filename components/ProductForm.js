@@ -52,13 +52,13 @@ const StyledSelect = styled.select`
 
 export default function ProductForm({
   _id,
-  name: existingName,
+  title: existingTitle,
   price: existingPrice,
   description: existingDescription,
   images: existingImages,
   category: existingCategory
 }) {
-  const [name, setName] = useState(existingName || "");
+  const [title, setTitle] = useState(existingTitle || "");
   const [price, setPrice] = useState(existingPrice || "");
   const [description, setDescription] = useState(existingDescription || "");
   const [redirect, setRedirect] = useState(false);
@@ -76,7 +76,7 @@ export default function ProductForm({
   async function saveProduct(e) {
     e.preventDefault();
     const product = {
-      name,
+      title,
       price,
       description,
       images,
@@ -131,8 +131,8 @@ export default function ProductForm({
         <input
           type="text"
           placeholder="Product Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <label>Product Category</label>
         <StyledSelect
@@ -181,7 +181,7 @@ export default function ProductForm({
           accept="image/*"
           onChange={uploadImages}
         ></input>
-        <button type="submit">Add Product</button>
+        <button type="submit">Save Product</button>
       </ProductWrapper>
     </form>
   );

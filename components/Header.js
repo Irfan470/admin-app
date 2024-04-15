@@ -1,4 +1,5 @@
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -15,7 +16,10 @@ const NavList = styled.ul`
 
     @media (max-width: 768px) {
         flex-direction: column;
+        align-items: center;
+        gap: 5px;
     }
+
 `;
 
 const NavItem = styled.li`
@@ -23,15 +27,32 @@ const NavItem = styled.li`
 `;
 
 const NavLink = styled.a`
-    text-decoration: none;
-    padding: 5px;
-    color: #333;
+  text-decoration: none;
+  padding: 5px;
+  color: #333;
+  ${(props) =>
+    props.isActive &&
+    `
 
-    &:hover {
-        color: #000;
-        font-weight: bold;
-
+    color: #17a2b8;
+    font-weight: bold;
+    background: #fff;
+    border-radius: 16px;
+    padding: 2px 10px;
+      @media (max-width: 768px) {
+        padding: 1px;
+        border-radius: 8px;
+       
     }
+
+
+  `}
+
+  &:hover {
+    color: #000;
+    font-weight: bold;
+  }
+ 
 `;
 const StyledLogoutButton = styled.button`
     background-color: #333;
@@ -39,34 +60,62 @@ const StyledLogoutButton = styled.button`
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-    position: relative;
-    align-items: right
+    border-radius: 16px;
+  
+  
    
     &:hover {
         background-color: #000;
     }
+    
+    
+    
 
-    `
+
+    `;
 
 
 const Header = () => {
+  const router = useRouter();
+  
+  
     return (
       <NavContainer>
         <NavList>
           <NavItem>
-            <NavLink href="/">Home</NavLink>
+            <NavLink
+              href="/"
+              isActive={router.pathname === "/"}
+            >
+              Home
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/orders">Orders</NavLink>
+            <NavLink
+              href="/orders"
+              isActive={router.pathname === "/orders"}
+            >
+              Orders
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/products">Products</NavLink>
+            <NavLink
+              href="/products"
+              isActive={router.pathname === "/products"}
+            >
+              Products
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/categories">Categories</NavLink>
+            <NavLink
+              href="/categories"
+              isActive={router.pathname === "/categories"}
+            >
+              Categories
+            </NavLink>
           </NavItem>
-          <StyledLogoutButton onClick={()=>signOut()} >
-           Logout
+          <StyledLogoutButton onClick={() => signOut()}>
+            Logout
           </StyledLogoutButton>
         </NavList>
       </NavContainer>

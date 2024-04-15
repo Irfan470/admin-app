@@ -1,34 +1,29 @@
+import { StyledH1 } from "@/components/Heading";
 import Layout from "@/components/Layout";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const StyledLink = styled(Link)`
-  color: red;
+  
   font-size: 16px;
   text-decoration: none;
-  margin: 10px;
+  margin: 10px 20px;
   background-color: #17a2b8;
   border-radius: 4px;
   padding: 4px;
   color: white;
   border: none;
   cursor: pointer;
-  position: absolute;
+
 `;
 
-const StyledHeading = styled.h1`
-  color: #17a2b8;
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 50px;
-`;
+
 
 const StyledList = styled.ul`
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 20px;
 
   li {
     display: flex;
@@ -68,15 +63,11 @@ const StyledLink3 = styled(Link)`
 `;
 
 // Media queries for smaller display devices
-const StyledLinkResponsive = styled(StyledLink)`
-  @media (max-width: 768px) {
-    margin: 10px 5px;
-  }
-`;
+
 
 const StyledLink2Responsive = styled(StyledLink2)`
   @media (max-width: 768px) {
-    margin: 10px 5px 10px 300px;
+    margin: 10px 5px 10px 200px;
   }
 `;
 const StyledP = styled.p`
@@ -89,6 +80,7 @@ const StyledP = styled.p`
     font-size: 16px;
   }
 `;
+
 
 export default function products() {
   const [products, setProducts] = useState([]);
@@ -115,25 +107,26 @@ export default function products() {
   return (
     <>
       <Layout>
-        <StyledLinkResponsive href={"/products/new"}>
+        <StyledH1 >Products</StyledH1>
+        <StyledLink href={"/products/new"}>
           Add new products
-        </StyledLinkResponsive>
+        </StyledLink>
+
+        <StyledList>
+          {products.map((product) => (
+            <li key={product._id}>
+              <StyledP>{product.title}</StyledP>
+
+              <StyledLink2Responsive href={`/products/edit/${product._id}`}>
+                Edit
+              </StyledLink2Responsive>
+              <StyledLink3 href={`/products/delete/${product._id}`}>
+                Delete
+              </StyledLink3>
+            </li>
+          ))}
+        </StyledList>
       </Layout>
-      <StyledHeading>Products</StyledHeading>
-      <StyledList>
-        {products.map((product) => (
-          <li key={product._id}>
-            <StyledP>{product.name}</StyledP>
-            
-            <StyledLink2Responsive href={`/products/edit/${product._id}`}>
-              Edit
-            </StyledLink2Responsive>
-            <StyledLink3 href={`/products/delete/${product._id}`}>
-              Delete
-            </StyledLink3>
-          </li>
-        ))}
-      </StyledList>
     </>
   );
 }
