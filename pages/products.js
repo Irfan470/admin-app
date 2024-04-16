@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const StyledLink = styled(Link)`
-  
   font-size: 16px;
   text-decoration: none;
   margin: 10px 20px;
@@ -15,10 +14,12 @@ const StyledLink = styled(Link)`
   color: white;
   border: none;
   cursor: pointer;
-
+  @media (max-width: 768px) {
+    margin: 10px 5px;
+    display: flex;
+    justify-content: center;
+  }
 `;
-
-
 
 const StyledList = styled.ul`
   list-style-type: none;
@@ -64,7 +65,6 @@ const StyledLink3 = styled(Link)`
 
 // Media queries for smaller display devices
 
-
 const StyledLink2Responsive = styled(StyledLink2)`
   @media (max-width: 768px) {
     margin: 10px 5px 10px 200px;
@@ -81,11 +81,8 @@ const StyledP = styled.p`
   }
 `;
 
-
 export default function products() {
   const [products, setProducts] = useState([]);
-    
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -107,10 +104,8 @@ export default function products() {
   return (
     <>
       <Layout>
-        <StyledH1 >Products</StyledH1>
-        <StyledLink href={"/products/new"}>
-          Add new products
-        </StyledLink>
+        <StyledH1>Products</StyledH1>
+        <StyledLink href={"/products/new"}>Add new products</StyledLink>
 
         <StyledList>
           {products.map((product) => (

@@ -4,8 +4,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 const NavContainer = styled.nav`
-    background-color: #17a2b8;
+  background-color: #17a2b8;
+  ;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid #ddd;
+ padding: 20px;
+ 
+  width: 100%;
+  
+  @media (max-width: 768px) {
     padding: 10px;
+  }
 `;
 
 const NavList = styled.ul`

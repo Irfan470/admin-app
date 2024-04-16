@@ -3,7 +3,8 @@ import { useSession } from 'next-auth/react'
 import React from 'react'
 import styled from 'styled-components'
 
-const UserWrapper = styled.div` 
+const UserWrapper = styled.div`
+margin: 0 0 266px 0; 
   display: flex;
   flex-direction: row;
   align-items: center;
